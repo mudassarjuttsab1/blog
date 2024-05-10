@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Last Updated</th>
+                        <th scope="col">Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for blog in blogs %}
+                    <tr>
+                        <td>{{ blog.name }}</td>
+                        <td>{{ blog.description }}</td>
+                        <td>{{ blog.created_at }}</td>
+                        <td>{{ blog.updated_at }}</td>
+                        <td>
+                            <a href="#" class="view-image-link" data-image-url="{{ blog.image.url }}">View Image</a>
+                            <img src="{{ blog.image.url }}" class="image-preview" style="display: none;" width="100" height="100">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const viewImageLinks = document.querySelectorAll('.view-image-link');
+        viewImageLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const imageUrl = this.getAttribute('data-image-url');
+                const imagePreview = this.nextElementSibling;
+                imagePreview.src = imageUrl;
+                imagePreview.style.display = 'block';
+            });
+        });
+    });
+</script>
+{% endblock content %}

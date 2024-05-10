@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid vh-100 d-flex justify-content-center align-items-center"> <!-- vh-100 makes the container full height -->
+        <div class="row">
+            <!-- Left Column with Signup Picture (optional) -->
+            <!-- If you have a signup image, you can place it here -->
+            <div class="col-md-6 bg-light p-5">
+                <div class="text-center mb-4">
+                    {% load static %}
+                    <img src="{% static 'images/signup-image.jpg' %}" alt="Signup Image" class="img-fluid">
+                </div>
+            </div>
+            <!-- Right Column with Signup Form -->
+            <div class="col-md-6 p-5">
+                <h2 class="text-center mb-4">Sign Up</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label fw-bold text-uppercase">User Name:</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label fw-bold text-uppercase mt-3">Email:</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_first_name" class="form-label fw-bold text-uppercase mt-3">First Name:</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_last_name" class="form-label fw-bold text-uppercase mt-3">Last Name:</label>
+                        {{ form.last_name }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_role" class="form-label fw-bold text-uppercase mt-3">Role:</label>
+                        {{ form.role }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password1" class="form-label fw-bold text-uppercase mt-3">Password:</label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password2" class="form-label fw-bold text-uppercase mt-3">Confirm Password:</label>
+                        {{ form.password2 }}
+                    </div>
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </form>
+                <p class="mt-3 text-center">Already have an account? <a href="{% url 'login' %}">Sign in here!</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
